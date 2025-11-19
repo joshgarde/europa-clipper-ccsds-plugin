@@ -1,7 +1,7 @@
 import os
 import unittest
 
-from pydownlinkparser import compare
+from spac_kit.parser import compare
 
 
 class TestECMCase:
