@@ -14,6 +14,8 @@ jobs:
       image: python:3.13-slim
     steps:
       - uses: actions/checkout@v4
+      - name: Install build tools
+        run: apt-get update && apt-get install -y gcc build-essential
       - name: Install Poetry
         run: pip install poetry
       - name: Install dependencies
@@ -30,6 +32,8 @@ jobs:
       image: python:3.13-slim
     steps:
       - uses: actions/checkout@v4
+      - name: Install build tools
+        run: apt-get update && apt-get install -y gcc build-essential
       - name: Install Poetry
         run: pip install poetry
       - name: Install dependencies
@@ -45,6 +49,8 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v4
+      - name: Install build tools
+        run: apt-get update && apt-get install -y gcc build-essential
       - name: Install Poetry
         run: pip install poetry
       - name: Install dependencies
