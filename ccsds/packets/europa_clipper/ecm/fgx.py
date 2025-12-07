@@ -3,12 +3,12 @@ import ccsdspy
 from ccsdspy.converters import Converter
 
 
-class BytesTo24BitInts(Converter):
+class BytesTo24BitInts(Converter):  # pylint: disable=too-few-public-methods
     """Convert from array of bytes to arrays of 24bits (3 bytes) integer."""
 
     def __init__(self):
-        """Does nothing."""
-        pass
+        """Do nothing. But is needed as the abstract super constructor has to be implemented."""
+        pass  # pylint: disable=unnecessary-pass
 
     def convert(self, field_array):
         """Convert list of arrays of bytes to list of arrays of int, each from 3 bytes."""
@@ -16,7 +16,7 @@ class BytesTo24BitInts(Converter):
         for fgx_channels in field_array:
             fgx_channels_24bits = []
             for i in range(0, len(fgx_channels), 3):
-                meas_3bytes = bytes(fgx_channels[i : i + 3])
+                meas_3bytes = bytes(fgx_channels[i: i + 3])
                 meas_int = int.from_bytes(meas_3bytes, "big", signed=True)
                 fgx_channels_24bits.append(meas_int)
             fgx_channels_24bits_list.append(fgx_channels_24bits)
@@ -27,7 +27,7 @@ class FGXPacketStructure(ccsdspy.VariableLength):
     """Flux Gate Packet Structure."""
 
     def __init__(self, sensor, frequency, apid):
-        """Constructor.
+        """Construct the class.
 
         @param sensor: sensor is 1, 2 or 3
         @param frequency: is "low" or "high", low is for both high and max rates

@@ -18,7 +18,7 @@ TO BE DONE (deploy from pypi, link to SPaC-kit for usage...)
 
 Clone the repository:
 
-    git clone  https://github.com/joshgarde/europa-cliper-ccsds-plugin.git 
+    git clone  https://github.com/joshgarde/europa-cliper-ccsds-plugin.git
 
 Create a virtual environment and activate it:
 
@@ -29,9 +29,26 @@ You might need to upgrade pip first:
 
     pip install --upgrade pip
 
+If you want to use the latest dev version of spac-kit, install it from the sources:
+
+     git clone https://github.com/CCSDSPy/SPaC-Kit.git
+     source {HOME OR PATH TO YOUR VENV}/bin/activate
+     pip install ./SPaC-Kit
+
 Install the package in editable mode, with the developer dependencies:
 
     pip install -e '.[dev]'
+
+Or use poetry:
+
+    pip install poetry
+    poetry lock
+    poetry install --with dev
+
+
+IMPORTANT: Install the pre-commit hooks, they will ensure code quality. If you don't do it the automated test running on the Pull Request will fail.
+
+    pre-commit install && pre-commit install -t pre-push
 
 Make your changes in the package definition files located in the `ccsds.packets.europa_clipper` directory.
 
@@ -41,3 +58,7 @@ Run the tests to ensure everything is working:
 
     pytest
 
+
+Before committing your changes update the poetry lock file:
+
+    poetry lock
