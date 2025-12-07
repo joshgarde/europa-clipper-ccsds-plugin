@@ -41,6 +41,7 @@ jobs:
         run: poetry run pytest
 
   publish:
+    if: ${{ inputs.run_publish }}
     needs: [lint, test]
     runs-on: ubuntu-latest
     container:
