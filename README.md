@@ -1,4 +1,4 @@
-# stac-kit-europa-clipper
+# SPaC-kit-europa-clipper
 
 [![DOI](https://zenodo.org/badge/1089080356.svg)](https://doi.org/10.5281/zenodo.17861892)
 
