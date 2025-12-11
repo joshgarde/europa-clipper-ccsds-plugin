@@ -57,8 +57,7 @@ jobs:
       - name: Install dependencies
         run: poetry install
       - name: Build and publish to PyPI
-        env:
-          POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PYPI_TOKEN }}
         run: |
           poetry config repositories.${{ vars.PYPI_REPOSITORY }} ${{ vars.PYPI_REPOSITORY_URL }}
+          poetry config pypi-token.${{ vars.PYPI_REPOSITORY }} ${{ secrets.PYPI_TOKEN }}
           poetry publish --build --no-interaction --repository ${{ vars.PYPI_REPOSITORY }}
