@@ -8,6 +8,8 @@ on:
   workflow_dispatch:
     inputs:
       environment:
+        description: 'Deployment environment (main or test)'
+        required: false
         type: environment
         default: main
 
@@ -45,10 +47,19 @@ jobs:
         run: poetry run pytest
 
   publish:
-    if: ${{ github.ref == 'refs/heads/main' }}
+    if: |
+      ${{
+        github.ref == 'refs/heads/main' ||
+        startsWith(github.ref_name, 'release/')
+      }}
+    environment: |
+      ${{
+        github.event.inputs.environment ||
+        (github.ref == 'refs/heads/main' && 'main') ||
+        (startsWith(github.ref_name, 'release/') && 'test')
+      }}
     needs: [lint, test]
     runs-on: ubuntu-latest
-    environment: ${{ github.event.inputs.environment || 'main'}}
     container:
       image: python:3.12-slim
     steps:
